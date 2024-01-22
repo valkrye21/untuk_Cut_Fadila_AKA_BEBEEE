@@ -1,0 +1,248 @@
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Proposal Web</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', 'segoe UI', Geneva, Verdana, sans-serif;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            height: 100vh;
+            margin: 0;
+            background-color: #f0f0f0;
+        }
+
+        .container {
+            text-align: center;
+        }
+
+        .question {
+            background-color: pink;
+            padding: 10px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            font-size: 24px;
+            color: #333;
+        }
+
+        .options {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .btn {
+            padding: 15px 25px;
+            font-size: 18px;
+            cursor: pointer;
+            margin: 10px;
+            border: none;
+            border-radius: 8px;
+            outline: none;
+            transition: transform 0.2s ease-in-out;
+        }
+
+        .yes {
+            background-color: #4CAF50;
+            color: white;
+            position: relative;
+        }
+
+        .yes:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: #4CAF50;
+            opacity: 0.5;
+            z-index: -1;
+            border-radius: 8px;
+        }
+
+        .no {
+            background-color: #f44336;
+            color: white;
+            position: relative;
+        }
+
+        .no:hover {
+            animation: moveAway 0.5s forwards ease-in-out;
+        }
+
+        @keyframes moveAway {
+            0% {
+                transform: translateX(0);
+            }
+            100% {
+                transform: translateX(-10000px);
+            }
+        }
+
+        .btn:hover {
+            transform: scale(1.1);
+        }
+
+        .location {
+            font-size: 10px;
+            color: #555;
+            margin-top: 10px;
+        }
+
+        .next-question {
+            font-size: 26px;
+            color: #333;
+            margin-top: 20px;
+            display: none;
+        }
+
+        .box-pink {
+            display: inline-block;
+            background-color: pink;
+            padding: 10px;
+            border-radius: 8px;
+            margin-top: 10px;
+        }
+
+        .box-red {
+            display: inline-block;
+            background-color: #f44336;
+            padding: 10px;
+            border-radius: 8px;
+            margin-top: 10px;
+        }
+
+        .slide-box {
+            display: inline-block;
+            background-color: #4CAF50;
+            padding: 10px;
+            border-radius: 8px;
+            margin-top: 10px;
+            animation: slideAway 0.5s forwards ease-in-out;
+        }
+
+        @keyframes slideAway {
+            0% {
+                transform: translateX(0);
+            }
+            100% {
+                transform: translateX(30px);
+            }
+        }
+
+        .final-message {
+            font-size: 30px;
+            color: #333;
+            margin-top: 20px;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="container" id="container">
+        <h1 class="question" id="firstQuestion">Will you go out with me, Beeeee?</h1>
+        <div class="options">
+            <button class="btn yes" onclick="showNextQuestion()">
+                mauuu bgtttttttt donggggggggg
+                <span class="location"></span>
+            </button>
+            <button class="btn no" onclick="moveNo()">
+                No
+                <span class="location"></span>
+            </button>
+        </div> 
+    
+        <p class="next-question" id="nextQuestion">Mau kapan cantik?</p>
+        <div class="options" id="nextOptions" style="display: none;">
+            <div class="box-pink">
+                <button class="btn" onclick="showDressCodeQuestion()">
+                    Ikut kamu aja
+                    <span class="location"> </span>
+                </button>
+            </div>
+            <div class="box-red">
+                <button class="btn" onclick="animateSlideAway();">
+                    Aku yang tentuin
+                    <span class="location"> </span>
+                </button>
+            </div>
+        </div>
+        <div id="slideBox" style="display: none;" class="slide-box">
+            <button class="btn" onclick="alert();">
+                Aku yang tentuin
+                <span class="location"> </span>
+            </button>
+        </div>
+        <div id="finalMessage" class="final-message" style="display: none;">
+            Terimakasih cantikk, ditunggu yaaa
+        </div>
+    </div>
+
+    <script>
+        function moveNo() {
+            alert('It\'s okay! Thank you for your honesty.');
+        }
+
+        function showNextQuestion() {
+            // Menampilkan pertanyaan berikutnya dan opsi
+            document.getElementById('nextQuestion').style.display = 'block';
+            document.getElementById('nextOptions').style.display = 'flex';
+
+            // Menyembunyikan pertanyaan dan opsi sebelumnya
+            document.getElementById('firstQuestion').style.display = 'none';
+            document.querySelector('.options').style.display = 'none';
+        }
+
+        function showDressCodeQuestion() {
+            document.getElementById('nextQuestion').style.display = 'block';
+            document.getElementById('nextQuestion').innerHTML = 'Pilih warna dresscode kita';
+            document.getElementById('nextOptions').innerHTML = `
+                <div class="box-pink">
+                    <button class="btn" onclick="showNextActivityQuestion('Hitam-Hitam');">
+                        Hitam-Hitam
+                        <span class="location"></span>
+                    </button>
+                </div>
+                <div class="box-red">
+                    <button class="btn" onclick="showNextActivityQuestion('Colorful');">
+                        Colorful
+                        <span class="location"></span>
+                    </button>
+                </div>
+            `;
+        }
+
+        function showNextActivityQuestion(color) {
+            document.getElementById('nextQuestion').innerHTML = 'Mau ngapain kita nanti?';
+            document.getElementById('nextOptions').innerHTML = `
+                <div class="box-pink">
+                    <button class="btn" onclick="showFinalMessage('Makannn-makannn donggg');">
+                        Makannn-makannn donggg
+                        <span class="location"></span>
+                    </button>
+                </div>
+                <div class="box-red">
+                    <button class="btn" onclick="jalan-jalannn ajaaa">
+                        jalan-jalannn ajaaa
+                        <span class="location"></span>
+                    </button>
+                </div>
+            `;
+        }
+
+        function showFinalMessage(activity) {
+            document.getElementById('nextOptions').style.display = 'none';
+            document.getElementById('nextQuestion').style.display = 'none';
+            document.getElementById('finalMessage').style.display = 'block';
+            document.getElementById('finalMessage').innerHTML = `Terimakasih cantikk, ditunggu yaaa makan-makannyaaaa`;
+        }
+        
+    </script>
+</body>
+</html>
